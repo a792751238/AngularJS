@@ -1,0 +1,98 @@
+﻿<!doctype html>
+<html ng-app="my_app">
+<head>
+    <meta charset="utf-8">
+    <title>angular案例-微博留言带分页</title>
+    <link href="./style/weibo.css" rel="stylesheet" type="text/css"/>
+    <script src="../js/angular.js"></script>
+    <script>
+        angular.module('my_app', [])
+            .filter('time2date', mainFilter)
+            .controller('mainController', mainController);
+
+
+        function mainFilter() {
+            return function (input) {
+                var oDate = new Date();
+                oDate.setTime(input * 1000);
+                return oDate.getFullYear() + '-' + (oDate.getMonth() + 1) + '-' + oDate.getDate();
+            };
+        }
+
+        function mainController($scope, $http) {
+            $scope.data = [];
+
+            //分页-页码
+            $http.get('weibo.php', {params: {act: 'get_page_count'}}).success(function (data) {
+                $scope.page_arr = [];
+                for (var i = 1; i <= data.count; i++) {
+                    $scope.page_arr.push(i);
+                }
+            });
+
+            //添加数据
+            $scope.add = function () {
+                $scope.data.unshift({
+                    content: $scope.content_input,
+                    time: getTime(),
+                    acc: 0,
+                    ref: 0
+                });
+                $scope.content_input = '';
+                if ($scope.data.length > 6) {
+                    $scope.data.pop();
+                }
+            };
+
+            $scope.remove = function (index) {
+                $scope.data.splice(index, 1);
+            };
+
+            $scope.addSupport = function (index) {
+                $scope.data[index].acc++;
+            };
+            $scope.addTrample = function (index) {
+                $scope.data[index].ref++;
+            };
+
+            function getTime() {
+                var oDate = new Date();
+                return oDate.getFullYear() + '-' + (oDate.getMonth() + 1) + '-' + oDate.getDate();
+            }
+        }
+    </script>
+</head>
+
+<body ng-controller="mainController">
+<div class="znsArea">
+    <!--留言-->
+    <div class="takeComment">
+        <textarea name="textarea" class="takeTextField" id="tijiaoText" ng-model="content_input"></textarea>
+        <div class="takeSbmComment">
+            <input type="button" class="inputs" value="" id="btn1" ng-click="add()"/>
+            <span>(可按 Enter 回复)</span>
+        </div>
+    </div>
+    <!--已留-->
+    <div class="commentOn">
+        <div class="noContent" ng-show="data.length==0">暂无留言</div>
+        <div class="messList" id="div_list">
+            <div class="reply" ng-repeat="item in data">
+                <p class="replyContent">{{item.content}}</p>
+                <p class="operation">
+                    <span class="replyTime">{{item.time}}</span>
+                    <span class="handle">
+                    	<a href="javascript:;" class="top" ng-click="addSupport($index)">{{item.acc}}</a>
+                        <a href="javascript:;" class="down_icon" ng-click="addTrample($index)">{{item.ref}}</a>
+                        <a href="javascript:;" class="cut" ng-click="remove($index)">删除</a>
+                    </span>
+                </p>
+            </div>
+        </div>
+        <div class="page">
+            <a href="javascript:;" ng-repeat="i in page_arr" ng-click="getPage(i)" ng-class="{active: i==cur_page}">{{i}}</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

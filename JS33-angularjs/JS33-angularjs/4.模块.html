@@ -1,0 +1,41 @@
+<!doctype html>
+<html ng-app="test">
+
+<head>
+    <meta charset="utf-8">
+    <title>controller——控制器</title>
+    <style>
+
+    </style>
+    <script src="angular.js"></script>
+    <script>
+        //一个页面——一个app
+        //一个页面——多个controller  每个controller尽量小
+        var app = angular.module('test', []); // 创建一个名字叫app的模块，第二个参数指的是该模块依赖那些模块
+        app.controller('control_name', function ($scope) { //controller——控制器
+            $scope.my_name = 'doudou';
+            $scope.net_name = 'baidu'; //通过$scope对象把数据模型或函数行为暴露给视图,$scope中的任何一个数据变化了，所有数据都会被检查一遍用于在视图和控制器之间传递数据
+        });
+        //model		模型-数据
+        //module	模块
+
+        app.controller('helloWorld', function ($scope) {
+            $scope.name = 'hello world';
+            $scope.helloFun = function () {//需要写到内部，否则解析不出来是哪一个scope
+                alert($scope.name);
+            }
+        });
+    </script>
+</head>
+
+<body>
+<p ng-app="test" ng-controller="control_name">
+    我的名字：{{my_name+' love '+net_name}}
+</p>
+<div ng-app="helloWorld" ng-controller="helloWorld">
+    <input type="text" ng-model="name">
+    <button ng-click='helloFun()'>点击</button>
+</div>
+</body>
+
+</html>

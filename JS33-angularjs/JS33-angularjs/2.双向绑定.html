@@ -1,0 +1,45 @@
+<!doctype html>
+<html ng-app="">
+<head>
+    <meta charset="utf-8">
+
+    <title>双向绑定</title>
+    <style>
+
+    </style>
+    <script src="angular.js"></script>
+</head>
+
+<body>
+<p>
+    <input type="text" value="" ng-model="name"/><br><!-- 双向绑定: 用户在视图上的修改会自动同步到数据模型中去 -->
+    <input type="text" value="" ng-model="name"/><br>
+    <input type="text" value="" ng-model="name"/><br>
+    <input type="text" value="" ng-model="name"/><br>
+    <input type="text" value="" ng-model="name"/><br>
+    <input type="text" value="" ng-model="name"/><br>
+    <input type="text" value="" ng-model="name"/><br>
+<h1>你输入了: {{name}}</h1>
+<form name="myForm">
+    Email:
+    <input type="email" name="myAddress" ng-model="text">
+    <span ng-show="myForm.myAddress.$error.email">不是一个合法的邮箱地址</span>
+</form>
+<p>在输入框中输入你的邮箱地址，如果不是一个合法的邮箱地址，会弹出提示信息。</p>
+<form name="myForm2" ng-init="myText = 'test@runoob.com'">
+    Email:
+    <input type="email" name="myAddress" ng-model="myText" required></p>
+    <h1>状态</h1>
+    <p>Valid: {{myForm.myAddress.$valid}} (如果输入的值是合法的则为 true)。</p>
+    <p>Dirty: {{myForm.myAddress.$dirty}} (如果值改变则为 true)。</p>
+    <p>Touched: {{myForm.myAddress.$touched}} (如果通过触屏点击则为 true)。</p>
+</form>
+</p>
+</body>
+</html>
+
+
+
+
+
+

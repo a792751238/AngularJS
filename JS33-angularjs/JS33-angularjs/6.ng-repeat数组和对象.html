@@ -1,0 +1,37 @@
+<!doctype html>
+<html ng-app="test">
+
+<head>
+    <meta charset="utf-8">
+    <title>controller——控制器,数组</title>
+    <style>
+
+    </style>
+    <script src="angular.js"></script>
+    <script>
+        var app = angular.module('test', []); //创建一个模块，对页面进行功能业务上的划分
+
+        app.controller('aaa', function ($scope) { //控制器
+            $scope.arr = [12, 5, 8];
+        });
+        //model		模型-数据
+        //module	模块
+    </script>
+</head>
+
+<body>
+<ul ng-controller="aaa">
+    <h1>使用 ng-repeat 来循环数组</h1>
+    <li ng-repeat="i in arr">{{i}}</li>
+</ul>
+<ul ng-init="names=[
+{name:'Jani',country:'Norway'},
+{name:'Hege',country:'Sweden'},
+{name:'Kai',country:'Denmark'}]">
+    <li ng-repeat="x in names">
+        {{x.name +' at '+ x.country}}
+    </li>
+</ul>
+</body>
+
+</html>

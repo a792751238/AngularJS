@@ -1,0 +1,35 @@
+<!doctype html>
+<html ng-app="">
+<head>
+    <meta charset="utf-8">
+
+    <title>双向绑定</title>
+    <style>
+        #div1 {
+            width: 100px;
+            height: 200px;
+            background: #CCC;
+        }
+    </style>
+    <script src="angular.js"></script>
+</head>
+
+<body>
+<p>
+    <select ng-model="city">
+        <option value="北京">北京</option>
+        <option value="上海">上海</option>
+        <option value="武汉">武汉</option>
+    </select>
+    城市：{{city}}
+    <!-- 双向绑定:同样的，如果数据模型中的值发生了变化，也会立刻同步到视图中去。 -->
+    <!-- 双向数据绑定最经常的应用场景就是表单 -->
+</p>
+</body>
+</html>
+
+
+
+
+
+
