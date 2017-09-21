@@ -1,5 +1,5 @@
 var routerApp = angular.module('routerApp', ['ui.router']);
-routerApp.config(function ($stateProvider, $urlRouterProvider) {
+routerApp.config(function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.when('/index', '/index/usermng/highendusers');
     $urlRouterProvider.otherwise('/index');
     $stateProvider
@@ -22,8 +22,8 @@ routerApp.config(function ($stateProvider, $urlRouterProvider) {
             views: {
                 'main@index': {
                     templateUrl: 'tpls3/usermng.html',
-                    controller: function ($scope, $state) {
-                        $scope.addUserType = function () {
+                    controller: function($scope, $state) {
+                        $scope.addUserType = function() {
                             $state.go("index.usermng.addusertype");
                         }
                     }
@@ -32,7 +32,16 @@ routerApp.config(function ($stateProvider, $urlRouterProvider) {
         })
         .state('index.usermng.highendusers', {
             url: '/highendusers',
-            templateUrl: 'tpls3/highendusers.html'
+            templateUrl: 'tpls3/highendusers.html',
+            controller: function($scope, $state) {
+                $scope.goToDetail = function(index) {
+                    $state.go("index.usermng.userdetail");
+                }
+            }
+        })
+        .state('index.usermng.userdetail', {
+            url: '/userdetail/:id',
+            templateUrl: 'tpls3/detail.html'
         })
         .state('index.usermng.normalusers', {
             url: '/normalusers',
@@ -45,8 +54,8 @@ routerApp.config(function ($stateProvider, $urlRouterProvider) {
         .state('index.usermng.addusertype', {
             url: '/addusertype',
             templateUrl: 'tpls3/addusertypeform.html',
-            controller: function ($scope, $state) {
-                $scope.backToPrevious = function () {
+            controller: function($scope, $state) {
+                $scope.backToPrevious = function() {
                     window.history.back();
                 }
             }
