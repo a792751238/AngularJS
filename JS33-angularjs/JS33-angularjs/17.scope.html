@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>scope</title>
+    <style>
+
+    </style>
+    <script src="./js/angular.js"></script>
+</head>
+
+<body ng-app="app">
+    <div ng-controller="globalCon">
+        {{name+"-"+name2+"-"+global_name+"-"+global_name2}}
+    </div>
+    <div ng-controller="globalCon2">
+        {{name+"-"+name2+"-"+global_name+"-"+global_name2}}
+    </div>
+</body>
+<script>
+angular.module('app', [])
+    .controller('globalCon', ['$scope', '$rootScope', globalCon])
+    .controller('globalCon2', ['$scope', '$rootScope', globalCon2])
+
+function globalCon($scope, $rootScope) {
+    $scope.name = 'yadang';
+    $rootScope.global_name = 'lilisy';
+}
+
+function globalCon2($scope, $rootScope) {
+    $scope.name2 = 'lilin';
+    $rootScope.global_name2 = 'ailisy';
+}
+</script>
+
+</html>

@@ -1,36 +1,42 @@
 <!doctype html>
-<html ng-app="test">
+<html>
+
 <head>
     <meta charset="utf-8">
-
     <title>$watch用于监听模型变化</title>
     <style>
 
     </style>
-    <script src="angular.js"></script>
-    <script>
-        var app = angular.module('test', []);
-
-        app.controller('aaa', function ($scope) {
-            $scope.a = 12;
-            $scope.b = 0;
-
-            //谁, 执行
-            $scope.$watch('a', function () {  //$watch用于监听模型变化,当你的模型部分发生变化时它会通知你
-                $scope.b = $scope.a * 2;
-            });
-        });
-    </script>
+    <script src="./js/angular.js"></script>
 </head>
 
-<body ng-controller="aaa">
-<input type="text" ng-model="a"/>
-{{b}}
+<body ng-app="test">
+    <div ng-controller="aaa">
+        <input type="text" ng-model="a" />
+        <input type="text" ng-model='b'>
+        <p>{{a+'-'+b}}</p>
+        <p>{{fun_num()}}</p>
+        <p>{{num}}</p>
+    </div>
 </body>
+<script>
+angular.module('test', [])
+    .controller('aaa', function($scope) {
+        $scope.a = 12;
+        $scope.b = 2;
+        $scope.fun_num = function() {
+            return $scope.a * $scope.b;
+        }
+
+        //谁, 执行
+        $scope.$watch('a', function() { //$watch用于监听模型变化,当你的模型部分发生变化时它会通知你
+            $scope.num = $scope.a * $scope.b;
+        });
+
+        $scope.$watch('b', function() { //$watch用于监听模型变化,当你的模型部分发生变化时它会通知你
+            $scope.num = $scope.a * $scope.b;
+        });
+    });
+</script>
+
 </html>
-
-
-
-
-
-

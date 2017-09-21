@@ -1,26 +1,27 @@
 <!doctype html>
 <html ng-app="my_app">
+
 <head>
     <meta charset="utf-8">
-
     <title>directive指令</title>
     <script src="angular.js"></script>
     <script>
-        var app = angular.module('my_app', []);
+    var app = angular.module('my_app', []);
 
-        app.directive('red', function () {  //directive指令:当一个 Angular 应用启动，Angular 就会遍历 DOM 树来解析 HTML，根据指令不同，完成不同操作
-            return function (scope, element, attr) {
-                //element——JQ对象
-                element.css('background', 'red');
-            };
-        });
+    app.directive('red', function() { //directive指令:当一个 Angular 应用启动，Angular 就会遍历 DOM 树来解析 HTML，根据指令不同，完成不同操作
+        return function(scope, element, attr) {
+            //element——JQ对象
+            element.css('background', 'red');
+        };
+    });
     </script>
 </head>
 
 <body>
-<input type="text" red/>
-<input type="text"/>
-<input type="text"/>
-<input type="text"/>
+    <input type="text" red/>
+    <input type="text" />
+    <input type="text" />
+    <input type="text" />
 </body>
+
 </html>
